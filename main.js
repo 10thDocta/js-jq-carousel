@@ -14,6 +14,18 @@ $(document).ready(function () {
     });
 
 
+    // metodo per tornare indietro nelle immagini
+    $(".prev > i").click(function () {
+
+        var imgActive = $("img.active");
+
+        $(imgActive).removeClass("active");
+
+        if ($(imgActive).hasClass("first")) { $("img.last").addClass("active"); }
+        else { $(imgActive).prev().addClass("active"); }
+
+
+    });
 
 
 
