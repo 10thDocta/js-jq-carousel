@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
     function foreward() {
-        var currentActive = $(".active");
+        var currentActive = $(".slider-wrapper .active");
 
         $(currentActive).removeClass("active");
 
         if ($(currentActive).hasClass("last")) {
-            $(".first").addClass("active");
+            $(".slider-wrapper .first").addClass("active");
         }
         else {
             $(currentActive).next().addClass("active");
@@ -15,12 +15,12 @@ $(document).ready(function () {
 
 
     function backward() {
-        var currentActive = $(".active");
+        var currentActive = $(".slider-wrapper .active");
 
         $(currentActive).removeClass("active");
 
         if ($(currentActive).hasClass("first")) {
-            $(".last").addClass("active");
+            $(".slider-wrapper .last").addClass("active");
         }
         else {
             $(currentActive).prev().addClass("active");
@@ -28,26 +28,37 @@ $(document).ready(function () {
     }
 
     // metodo per avanzare in avanti nelle immagini cliccando sulla freccia destra
-    $(".next > i").click(function () {
+    $(".slider-wrapper .next > i").click(function () {
         foreward();
     });
 
 
     // metodo per tornare indietro nelle immagini cliccando sulla freccia sinistra
-    $(".prev > i").click(function () {
+    $(".slider-wrapper .prev > i").click(function () {
         backward();
     });
 
+    // torna indietro alla pressione della freccia sinistra (37)
     // avanza alla pressione della freccia destra (39)
     $(document).keydown(function (e) {
+        if (e.which == 37) { backward(); }
         if (e.which == 39) { foreward(); }
     })
 
-    // torna indietro alla pressione della freccia sinistra (37)
-    $(document).keydown(function (e) {
-        if (e.which == 37) { backward(); }
-    })
 
+    $(".nav > i").click(function () {
+
+        var index = $(this).index();
+        $("img, .nav i").removeClass("active");
+
+        // var indexImg = index + 1;
+        // $(`img:nth-child(${indexImg})`).addClass("active");
+
+        $("img").eq(index).addClass("active");
+
+        $(this).addClass("active");
+
+    });
 
 }
 )
